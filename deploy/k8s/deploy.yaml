@@ -16,7 +16,7 @@ spec:
       - name: ms-ia
         image: {IMAGE_TAG}
         ports:
-        - containerPort: 8080
+        - containerPort: 8081
         resources:
           limits:
             cpu: "2000m"     # Equivalent to 2 CPUs
