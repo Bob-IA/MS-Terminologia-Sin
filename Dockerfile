@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 8081
 
 # Comando para ejecutar la aplicación
-CMD ["python", "app.py"]
+CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:8081", "app:app"]
