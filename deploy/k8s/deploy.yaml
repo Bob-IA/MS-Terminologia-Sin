@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms-term
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ms-term
+  template:
+    metadata:
+      labels:
+        app: ms-term
+    spec:
+      containers:
+      - name: ms-ia
+        image: {IMAGE_TAG}
+        ports:
+        - containerPort: 8080
+        resources:
+          limits:
+            cpu: "2000m"     # Equivalent to 2 CPUs
+            memory: "2Gi"    # 2 GiB of memory
+          requests:
+            cpu: "1000m"     # Equivalent to 1 CPU
+            memory: "1Gi"    # 1 GiB of memory

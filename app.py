@@ -1,4 +1,6 @@
 from flask import Flask, request, jsonify
+import csv
+import io
 
 app = Flask(__name__)
 
@@ -44,12 +46,37 @@ SINONIMOS = {
     "cincel de madera": ["formón de madera", "gubia", "cincel de carpintero"],
 }
 
+def obtener_sinonimos_producto(producto):
+    """Busca sinónimos para un producto específico."""
+    return SINONIMOS.get(producto, [producto])
+
+def obtener_sinonimos_multiple(nombres):
+    """Obtiene sinónimos para una lista de nombres de productos."""
+    resultados = {}
+    for nombre in nombres:
+        resultados[nombre] = obtener_sinonimos_producto(nombre.strip().lower())
+    return resultados
+
 @app.route('/sinonimos', methods=['POST'])
 def obtener_sinonimos():
-    data = request.json
-    producto = data.get("producto", "").lower()
-    sinonimos = SINONIMOS.get(producto, [producto])  # Devuelve el término original si no encuentra sinónimos
-    return jsonify({"sinonimos": sinonimos})
+    if 'file' in request.files:
+        # Procesa un archivo CSV
+        file = request.files['file']
+        stream = io.StringIO(file.stream.read().decode("UTF8"), newline=None)
+        reader = csv.reader(stream)
+        
+        productos = []
+        for row in reader:
+            productos.extend(row)  # Agrega cada producto del CSV
+        
+        sinonimos = obtener_sinonimos_multiple(productos)
+    
+    else:
+        data = request.json
+        nombres = data.get('producto', '').split(',')  # Permite múltiples nombres separados por comas
+        sinonimos = obtener_sinonimos_multiple(nombres)
+    
+    return jsonify(sinonimos)
 
 if __name__ == '__main__':
-    app.run(port=8081)  # Puerto para el microservicio de sinónimos
+    app.run(port=8001)
