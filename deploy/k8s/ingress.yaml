@@ -16,7 +16,7 @@ spec:
           service:
             name: ms-term-svc
             port:
-              number: 80
+              number: 81
         pathType: Prefix
         path: /
   tls:
