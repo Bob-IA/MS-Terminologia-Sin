@@ -10,7 +10,7 @@ SINONIMOS = {
     "martillo": ["mazo", "marrón", "maceta", "martillo de carpintero", "martillo de bola"],
     "alicate": ["pinza", "tenaza", "pince", "pico de loro"],
     "taladro": ["perforadora", "drill", "bareno"],
-    "galleta":["esmeril angular", "amoladora", "pulidora", "radial", "rebarbadora", "discos del esmeril"],
+    "galleta": ["esmeril angular", "amoladora", "pulidora", "radial", "rebarbadora", "discos del esmeril"],
     "amoladora": ["esmeril angular", "pulidora", "radial", "galleta", "rebarbadora"],
     "llave inglesa": ["llave ajustable", "francesa", "llave crescent", "llave española"],
     "cinta métrica": ["metro", "wincha", "flexómetro", "cinta de medir"],

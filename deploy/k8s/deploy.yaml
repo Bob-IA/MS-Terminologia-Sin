@@ -18,9 +18,11 @@ spec:
         ports:
         - containerPort: 8081
         resources:
+          # You must specify requests for CPU to autoscale
+          # based on CPU utilization
           limits:
-            cpu: "2000m"     # Equivalent to 2 CPUs
-            memory: "2Gi"    # 2 GiB of memory
+            cpu: 50m
+            memory: 128Mi
           requests:
-            cpu: "1000m"     # Equivalent to 1 CPU
-            memory: "1Gi"    # 1 GiB of memory
+            cpu: 50m
+            memory: 128Mi
